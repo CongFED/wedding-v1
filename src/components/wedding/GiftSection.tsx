@@ -1,18 +1,27 @@
 import { weddingConfig } from "@/config/wedding";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, MapPin, ScanLine } from "lucide-react";
 import { useState } from "react";
-
+import momoQr from "@/assets/URLQRCode.png";
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Copy failed:", error);
+    }
   };
+
   return (
-    <button onClick={handleCopy} className="btn-wedding text-xs py-2 px-4">
-      {copied ? <Check size={12} /> : <Copy size={12} />}
-      {copied ? "Đã copy" : "Copy"}
+    <button
+      onClick={handleCopy}
+      className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90"
+    >
+      {copied ? <Check size={14} /> : <Copy size={14} />}
+      {copied ? "Đã sao chép" : "Sao chép"}
     </button>
   );
 }
@@ -21,52 +30,95 @@ export default function GiftSection() {
   const { gift } = weddingConfig;
 
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="scroll-reveal text-center mb-10">
-          <p className="section-title tracking-[0.3em]">Send Your Gift</p>
-          <p className="font-body text-muted-foreground text-sm mt-3">
+    <section className="bg-background py-16 md:py-24">
+      <div className="mx-auto max-w-4xl px-6">
+        <div className="scroll-reveal mb-10 text-center">
+          <p className="section-title tracking-[0.3em]">MỪNG CƯỚI</p>
+          <p className="mt-3 font-body text-sm text-muted-foreground">
             Gửi quà mừng đến cô dâu và chú rể qua các hình thức bên dưới
           </p>
         </div>
 
-        <div className="scroll-reveal grid md:grid-cols-2 gap-6">
+        <div className="scroll-reveal grid gap-6 md:grid-cols-2">
           {/* Bank */}
-          <div className="wedding-card text-center">
-            <p className="font-serif-display text-foreground font-bold uppercase tracking-widest text-sm mb-4">
-              {gift.bankName}
+          <div className="rounded-2xl border border-primary/10 bg-card p-6 text-center shadow-sm">
+            <p className="mb-4 font-serif-display text-sm font-bold uppercase tracking-[0.25em] text-foreground">
+                  {gift.bankName}
             </p>
-            <p className="font-body text-muted-foreground text-sm mb-1">Số tài khoản</p>
-            <p className="font-serif-display text-foreground text-lg font-semibold mb-1">
-              {gift.accountNumber}
+
+            <div className="mx-auto mb-4 flex w-fit items-center justify-center rounded-2xl bg-white p-3 shadow-sm ring-1 ring-primary/10">
+              <img
+                src={momoQr}
+                alt="Mã QR MoMo"
+                className="h-44 w-44 rounded-lg object-cover md:h-52 md:w-52"
+              />
+            </div>
+
+            <div className="mb-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <ScanLine size={15} />
+              <span>Quét mã để mừng cưới</span>
+            </div>
+
+            <p className="mb-1 text-sm text-muted-foreground">Chủ tài khoản</p>
+            <p className="mb-5 text-sm uppercase tracking-wide text-foreground">
+              {gift.accountHolder}
             </p>
-            <p className="font-body text-muted-foreground text-xs mb-4">{gift.accountHolder}</p>
-            <CopyButton text={gift.accountNumber} />
+
+            <a
+              href={momoQr}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90"
+            >
+              Xem QR lớn
+            </a>
           </div>
 
-          {/* Momo */}
-          <div className="wedding-card text-center">
-            <p className="font-serif-display text-foreground font-bold uppercase tracking-widest text-sm mb-4">
-              MoMo
+          {/* MoMo QR */}
+          <div className="rounded-2xl border border-primary/10 bg-card p-6 text-center shadow-sm">
+            <p className="mb-4 font-serif-display text-sm font-bold uppercase tracking-[0.25em] text-foreground">
+                  {gift.bankName}
             </p>
-            <p className="font-body text-muted-foreground text-sm mb-1">Số điện thoại</p>
-            <p className="font-serif-display text-foreground text-lg font-semibold mb-1">
-              {gift.momoPhone}
+
+            <div className="mx-auto mb-4 flex w-fit items-center justify-center rounded-2xl bg-white p-3 shadow-sm ring-1 ring-primary/10">
+              <img
+                src={momoQr}
+                alt="Mã QR MoMo"
+                className="h-44 w-44 rounded-lg object-cover md:h-52 md:w-52"
+              />
+            </div>
+
+            <div className="mb-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <ScanLine size={15} />
+              <span>Quét mã để mừng cưới</span>
+            </div>
+
+            <p className="mb-1 text-sm text-muted-foreground">Chủ tài khoản</p>
+            <p className="mb-5 text-sm uppercase tracking-wide text-foreground">
+              {gift.accountHolder1}
             </p>
-            <p className="font-body text-muted-foreground text-xs mb-4">{gift.accountHolder}</p>
-            <CopyButton text={gift.momoPhone} />
+
+            <a
+              href={momoQr}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90"
+            >
+              Xem QR lớn
+            </a>
           </div>
         </div>
 
         {/* Shipping address */}
-        <div className="scroll-reveal mt-8 text-center">
-          <p className="font-serif-display text-foreground font-semibold uppercase tracking-widest text-sm mb-4">
+        <div className="scroll-reveal mt-10 text-center">
+          <p className="mb-4 font-serif-display text-sm font-semibold uppercase tracking-[0.25em] text-foreground">
             Địa chỉ gửi quà
           </p>
-          <a href="#" className="btn-wedding inline-flex text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            123 Đường Hạnh Phúc, Quận 1, TP.HCM
-          </a>
+
+          <div className="inline-flex max-w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-xs font-semibold uppercase tracking-wide text-primary-foreground shadow-sm">
+            <MapPin size={14} />
+            <span>{gift.shippingAddress}</span>
+          </div>
         </div>
       </div>
     </section>

@@ -15,7 +15,7 @@
     --popover: 30 33% 95%;
     --popover-foreground: 20 30% 20%;
 
-    --primary: 16 45% 45%;
+    --primary: 16 54.21% 57.55%;
     --primary-foreground: 30 33% 95%;
 
     --secondary: 30 30% 88%;
@@ -36,7 +36,7 @@
 
     --radius: 0.5rem;
 
-    --terracotta: 16 45% 45%;
+    --terracotta: 16 54.21% 57.55%;
     --terracotta-light: 16 40% 55%;
     --terracotta-dark: 16 50% 35%;
     --cream: 30 33% 95%;
@@ -384,4 +384,27 @@
 /* Hover cho xịn */
 .vinyl:hover {
   transform: scale(1.05);
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.16;
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.08);
+    opacity: 0.32;
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.16;
+  }
+}
+
+.animate-float-heart {
+  animation-name: floatHeart;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }

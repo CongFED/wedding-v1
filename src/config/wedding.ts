@@ -53,12 +53,13 @@ export const weddingConfig = {
     author: "Phước Thành",
   },
   gallery: [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6],
-  youtubeVideoId: "dQw4w9WgXcQ",
+  youtubeVideoId: "VD5aITz1iRQ",
   gift: {
     bankName: "Vietcombank",
     accountNumber: "1234567890",
     accountHolder: "NGUYEN VAN A",
-    momoPhone: "0901234567",
+    accountHolder1: "NGUYEN VAN B",
+    shippingAddress: "123 Đường Hạnh Phúc, Quận 1, TP.HCM",
   },
   families: {
     bride: { family: "Gia đình Nhà gái", parents: "Ông Bà Nguyễn Văn A" },
