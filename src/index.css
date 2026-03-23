@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 33% 95%;
+    --foreground: 20 30% 20%;
+
+    --card: 30 30% 92%;
+    --card-foreground: 20 30% 20%;
+
+    --popover: 30 33% 95%;
+    --popover-foreground: 20 30% 20%;
+
+    --primary: 16 45% 45%;
+    --primary-foreground: 30 33% 95%;
+
+    --secondary: 30 30% 88%;
+    --secondary-foreground: 20 30% 20%;
+
+    --muted: 30 20% 90%;
+    --muted-foreground: 20 15% 45%;
+
+    --accent: 38 60% 55%;
+    --accent-foreground: 20 30% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 30 25% 82%;
+    --input: 30 25% 82%;
+    --ring: 16 45% 45%;
+
+    --radius: 0.5rem;
+
+    --terracotta: 16 45% 45%;
+    --terracotta-light: 16 40% 55%;
+    --terracotta-dark: 16 50% 35%;
+    --cream: 30 33% 95%;
+    --cream-dark: 30 30% 88%;
+    --gold: 38 60% 55%;
+    --gold-light: 38 50% 70%;
+    --brown-text: 20 30% 20%;
+
+    --font-script: 'Great Vibes', cursive;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-body: 'Lora', serif;
+
+    --shadow-soft: 0 4px 20px -4px hsl(16 45% 45% / 0.15);
+    --shadow-card: 0 8px 30px -8px hsl(20 30% 20% / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .font-serif-display {
+    font-family: var(--font-serif);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .text-terracotta {
+    color: hsl(var(--terracotta));
+  }
+
+  .bg-terracotta {
+    background-color: hsl(var(--terracotta));
+  }
+
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+
+  .bg-cream-dark {
+    background-color: hsl(var(--cream-dark));
+  }
+
+  .border-gold {
+    border-color: hsl(var(--gold));
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply font-serif-display text-terracotta uppercase tracking-[0.25em] text-sm font-semibold;
+  }
+
+  .section-subtitle {
+    @apply font-script text-gold text-3xl md:text-4xl;
+  }
+
+  .wedding-card {
+    @apply bg-cream-dark rounded-lg p-6 md:p-8;
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-wedding {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-terracotta text-cream rounded-md font-serif-display uppercase tracking-widest text-sm font-medium transition-all duration-300;
+  }
+
+  .btn-wedding:hover {
+    background-color: hsl(var(--terracotta-dark));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .countdown-box {
+    @apply bg-terracotta text-cream rounded-lg w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .vinyl-btn {
+    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full cursor-pointer transition-transform duration-300;
+    background: radial-gradient(circle at 50% 50%, hsl(var(--brown-text)) 15%, hsl(var(--terracotta-dark)) 16%, hsl(var(--brown-text)) 30%, hsl(var(--terracotta-dark)) 31%, hsl(var(--brown-text)) 45%, hsl(var(--terracotta)) 46%);
+    box-shadow: 0 4px 15px hsl(20 30% 20% / 0.3);
+  }
+
+  .vinyl-btn.spinning {
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Floating hearts */
+  @keyframes float-heart {
+    0% {
+      opacity: 0;
+      transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
+    }
+
+    10% {
+      opacity: var(--heart-opacity, 0.25);
+    }
+
+    50% {
+      transform: translateY(-50vh) translateX(20px) scale(1) rotate(15deg);
+    }
+
+    90% {
+      opacity: var(--heart-opacity, 0.25);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-100vh) translateX(-10px) scale(0.8) rotate(-10deg);
+    }
+  }
+
+  .animate-float-heart {
+    animation: float-heart linear infinite;
+    color: hsl(var(--terracotta-light));
+  }
+
+  /* Scroll reveal variants */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Stagger children */
+  .stagger-children>* {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .stagger-children.visible>*:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  .stagger-children.visible>*:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  .stagger-children.visible>*:nth-child(3) {
+    transition-delay: 0.19s;
+  }
+
+  .stagger-children.visible>*:nth-child(4) {
+    transition-delay: 0.26s;
+  }
+
+  .stagger-children.visible>*:nth-child(5) {
+    transition-delay: 0.33s;
+  }
+
+  .stagger-children.visible>*:nth-child(6) {
+    transition-delay: 0.40s;
+  }
+
+  .stagger-children.visible>* {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  .stagger-children.visible>* {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Hero pulse heart */
+  @keyframes pulse-heart {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  .animate-pulse-heart {
+    animation: pulse-heart 1.5s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* Gallery item hover glow */
+  .gallery-item {
+    @apply cursor-pointer overflow-hidden rounded-lg relative;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -10px hsl(16 45% 45% / 0.25);
+  }
+
+  .gallery-item::after {
+    content: '';
+    @apply absolute inset-0 rounded-lg;
+    background: linear-gradient(to top, hsl(var(--terracotta) / 0.3) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+}
+
+.vinyl {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #2b2b2b 0%, #000 60%, #111 100%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Vân đĩa */
+.vinyl::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle,
+      rgba(255, 255, 255, 0.04) 0px,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 2px,
+      transparent 4px);
+}
+
+/* Nhãn giữa */
+.vinyl-inner {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #a47148, #5c2f1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-label {
+  width: 8px;
+  height: 8px;
+  background: #e6c89c;
+  border-radius: 50%;
+}
+
+/* Animation xoay */
+.spinning {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover cho xịn */
+.vinyl:hover {
+  transform: scale(1.05);
+}
